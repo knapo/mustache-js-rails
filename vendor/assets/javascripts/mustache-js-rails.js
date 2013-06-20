@@ -1,3 +1,0 @@
-function dupa(){
-	alert('dupa');
-}
