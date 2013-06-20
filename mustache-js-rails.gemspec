@@ -1,5 +1,5 @@
 $:.push File.expand_path("../lib", __FILE__)
-require "mustache-js-rails/version"
+require "mustache-js/version"
 
 Gem::Specification.new do |s|
   s.name        = "mustache-js-rails"
