@@ -3,7 +3,7 @@ require "mustache-js-rails/version"
 
 Gem::Specification.new do |s|
   s.name        = "mustache-js-rails"
-  s.version     = JqueryColorbox::VERSION
+  s.version     = MustacheJsRails::VERSION
   s.authors     = ["Krzysztof Knapik"]
   s.email       = ["knapo@knapo.net"]
   s.homepage    = "https://github.com/knapo/jquery-colorbox-rails"
