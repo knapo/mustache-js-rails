@@ -1,4 +1,4 @@
-module MustacheJsRails
+module MustacheJs
 	class Engine < ::Rails::Engine
 	end
 end
