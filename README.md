@@ -3,10 +3,10 @@
 mustache-js-rails integrates [mustache.js](https://github.com/janl/mustache.js) 
 and [mustache jQuery integration](https://github.com/jonnyreeves/jquery-Mustache) with rails 3.1+ asset pipeline.
 
-Current binded versions are:
+Integrated versions are:
 
-  * mustache.js - 0.7.2
-  * jQuery mustache - 0.2.7
+  * mustache.js - <b id="mustache-js-version">0.7.2</b>
+  * jQuery mustache - <b id="jQuery-mustache-version">0.2.7</b>
  
 ### Installation
 

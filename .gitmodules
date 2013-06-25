@@ -2,3 +2,6 @@
 	path = mustache.js
 	url = git@github.com:janl/mustache.js.git
 	ignore = dirty
+[submodule "jquery.mustache.js"]
+	path = jquery.mustache.js
+	url = git@github.com:jonnyreeves/jquery-Mustache.git

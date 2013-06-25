@@ -1,10 +1,42 @@
 #!/usr/bin/env rake
 require 'bundler/setup'
-
-Bundler::GemHelper.install_tasks
+require 'bundler/gem_tasks'
 
 task :update do
-	
+	js_dir  = 'vendor/assets/javascripts'
+	css_dir = 'vendor/assets/stylesheets'
+	img_dir = 'vendor/assets/images'
+	[js_dir, css_dir, img_dir].each do |dir|
+		FileUtils.rm_r(dir)
+		FileUtils.mkdir(dir)
+		FileUtils.touch(File.join(dir, '.gitkeep'))
+	end
+
+	puts 'Updating source files...'
+	`git submodule foreach git pull`
+
+	puts 'Copying source js files...'
+  FileUtils.cp('mustache.js/mustache.js', js_dir)
+  FileUtils.cp('jquery.mustache.js/jquery.mustache.js', js_dir)
+
+  puts 'Updating version...'
+  mustache_js_version = File.read('mustache.js/mustache.js.nuspec').match(/<version>([\.\d]+)<\/version>/)[1]
+  jquery_mustache_js_version = File.read('jquery.mustache.js/jquery.mustache.js').match(/jQuery Mustache - v([\.\d]+)/)[1]
+  puts "Current mustache.js version is: #{mustache_js_version}"
+  puts "Current jquery.mustache.js version is: #{jquery_mustache_js_version}"
+  readme = File.read('README.md')
+  readme = readme.gsub(/(?<=<b id="mustache-js-version">)[\d\.]+(?=<\/b>)/, mustache_js_version)
+  readme = readme.gsub(/(?<=<b id="jquery-mustache-js-version">)[\d\.]+(?=<\/b>)/, jquery_mustache_js_version)
+  File.open('README.md','w') { |f| f.write(readme) }
 end
-# https://raw.github.com/janl/mustache.js/0.7.2/mustache.js
-# https://github.com/jonnyreeves/jquery-Mustache/blob/v0.2.7/jquery.mustache.js
+
+task :build do
+	FileUtils.rm_f Dir['*.gem']
+	`gem build jquery-colorbox-rails.gemspec`
+	built_gem_file = Dir['*.gem'].first
+	if built_gem_file
+		`gem push #{built_gem_file}`
+	else
+		raise "Gem was not built!"
+	end
+end
