@@ -1,0 +1,4 @@
+[submodule "mustache.js"]
+	path = mustache.js
+	url = git@github.com:janl/mustache.js.git
+	ignore = dirty
