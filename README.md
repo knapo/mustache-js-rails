@@ -1,19 +1,19 @@
 # mustache-js-rails
 
-mustache-js-rails integrates [mustache.js](https://github.com/janl/mustache.js) 
+mustache-js-rails integrates [mustache.js](https://github.com/janl/mustache.js)
 and [mustache jQuery integration](https://github.com/jonnyreeves/jquery-Mustache) with rails 3.1+ asset pipeline.
 
 Integrated versions are:
 
   * mustache.js - <b id="mustache-js-version">0.8.1</b>
-  * jQuery mustache - <b id="jQuery-mustache-version">0.2.7</b>
- 
+  * jQuery mustache - <b id="jquery-mustache-js-version">0.2.8</b>
+
 ### Installation
 
 Add
 
 ``` ruby
-gem 'mustache-js-rails'` 
+gem 'mustache-js-rails'`
 ```
 
 to your `Gemfile`
