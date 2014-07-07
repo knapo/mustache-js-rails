@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/knapo/mustache-js-rails"
   s.summary     = %q{mustache.js and jQuery.mustache.js for Rails 3.1+ asset pipeline}
   s.description = %q{
-    mustache.js (https://github.com/janl/mustache.js) 
-    and jQuery.mustache.js (https://github.com/jonnyreeves/jquery-Mustache) 
+    mustache.js (https://github.com/janl/mustache.js)
+    and jQuery.mustache.js (https://github.com/jonnyreeves/jquery-Mustache)
     for Rails 3.1+ asset pipeline
   }
 
@@ -18,5 +18,5 @@ Gem::Specification.new do |s|
   s.files = Dir["{vendor,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "Gemfile", "README.md"]
   s.require_paths = ["lib"]
 
-  s.add_dependency 'railties',   '>= 3.1'
+  s.add_dependency 'railties', '>= 3.1', '<= 5.0'
 end
