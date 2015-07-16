@@ -3,7 +3,7 @@
  * http://github.com/janl/mustache.js
  */
 
-/*global define: false*/
+/*global define: false Mustache: true*/
 
 (function defineMustache (global, factory) {
   if (typeof exports === 'object' && exports) {
@@ -11,7 +11,8 @@
   } else if (typeof define === 'function' && define.amd) {
     define(['exports'], factory); // AMD
   } else {
-    factory(global.Mustache = {}); // <script>
+    global.Mustache = {};
+    factory(Mustache); // script, wsh, asp
   }
 }(this, function mustacheFactory (mustache) {
 
@@ -24,8 +25,24 @@
     return typeof object === 'function';
   }
 
+  /**
+   * More correct typeof string handling array
+   * which normally returns typeof 'object'
+   */
+  function typeStr (obj) {
+    return isArray(obj) ? 'array' : typeof obj;
+  }
+
   function escapeRegExp (string) {
     return string.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&');
+  }
+
+  /**
+   * Null safe way of checking whether or not an object,
+   * including its prototype, has a given property
+   */
+  function hasProperty (obj, propName) {
+    return obj != null && typeof obj === 'object' && (propName in obj);
   }
 
   // Workaround for https://issues.apache.org/jira/browse/COUCHDB-577
@@ -355,7 +372,7 @@
     var cache = this.cache;
 
     var value;
-    if (name in cache) {
+    if (cache.hasOwnProperty(name)) {
       value = cache[name];
     } else {
       var context = this, names, index, lookupHit = false;
@@ -378,14 +395,14 @@
            * `undefined` and we want to avoid looking up parent contexts.
            **/
           while (value != null && index < names.length) {
-            if (index === names.length - 1 && value != null)
-              lookupHit = (typeof value === 'object') &&
-                value.hasOwnProperty(names[index]);
+            if (index === names.length - 1)
+              lookupHit = hasProperty(value, names[index]);
+
             value = value[names[index++]];
           }
-        } else if (context.view != null && typeof context.view === 'object') {
+        } else {
           value = context.view[name];
-          lookupHit = context.view.hasOwnProperty(name);
+          lookupHit = hasProperty(context.view, name);
         }
 
         if (lookupHit)
@@ -548,7 +565,7 @@
   };
 
   mustache.name = 'mustache.js';
-  mustache.version = '2.0.0';
+  mustache.version = '2.1.2';
   mustache.tags = [ '{{', '}}' ];
 
   // All high-level mustache.* functions use this writer.
@@ -575,6 +592,12 @@
    * default writer.
    */
   mustache.render = function render (template, view, partials) {
+    if (typeof template !== 'string') {
+      throw new TypeError('Invalid template! Template should be a "string" ' +
+                          'but "' + typeStr(template) + '" was given as the first ' +
+                          'argument for mustache#render(template, view, partials)');
+    }
+
     return defaultWriter.render(template, view, partials);
   };
 
