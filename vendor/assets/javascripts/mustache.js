@@ -6,7 +6,7 @@
 /*global define: false Mustache: true*/
 
 (function defineMustache (global, factory) {
-  if (typeof exports === 'object' && exports) {
+  if (typeof exports === 'object' && exports && typeof exports.nodeName !== 'string') {
     factory(exports); // CommonJS
   } else if (typeof define === 'function' && define.amd) {
     define(['exports'], factory); // AMD
@@ -565,7 +565,7 @@
   };
 
   mustache.name = 'mustache.js';
-  mustache.version = '2.1.2';
+  mustache.version = '2.1.3';
   mustache.tags = [ '{{', '}}' ];
 
   // All high-level mustache.* functions use this writer.

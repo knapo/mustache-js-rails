@@ -5,7 +5,7 @@ and [mustache jQuery integration](https://github.com/jonnyreeves/jquery-Mustache
 
 Integrated versions are:
 
-  * mustache.js - <b id="mustache-js-version">2.1.2</b>
+  * mustache.js - <b id="mustache-js-version">2.1.3</b>
   * jQuery mustache - <b id="jquery-mustache-js-version">0.2.8</b>
 
 ### Installation
