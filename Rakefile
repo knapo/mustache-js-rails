@@ -31,14 +31,3 @@ task :update do
   readme = readme.gsub(/(?<=<b id="jquery-mustache-js-version">)[\d\.]+(?=<\/b>)/, jquery_mustache_js_version)
   File.open('README.md','w') { |f| f.write(readme) }
 end
-
-task :build do
-	FileUtils.rm_f Dir['*.gem']
-	`gem build jquery-colorbox-rails.gemspec`
-	built_gem_file = Dir['*.gem'].first
-	if built_gem_file
-		`gem push #{built_gem_file}`
-	else
-		raise "Gem was not built!"
-	end
-end

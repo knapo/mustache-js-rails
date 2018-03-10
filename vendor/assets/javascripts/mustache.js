@@ -447,7 +447,7 @@
     var tokens = cache[template];
 
     if (tokens == null)
-      tokens = cache[template] = parseTemplate(template, tags);
+      tokens = cache[template + ':' + (tags || mustache.tags).join(':')] = parseTemplate(template, tags);
 
     return tokens;
   };
@@ -567,7 +567,7 @@
   };
 
   mustache.name = 'mustache.js';
-  mustache.version = '2.2.1';
+  mustache.version = '2.3.0';
   mustache.tags = [ '{{', '}}' ];
 
   // All high-level mustache.* functions use this writer.
@@ -626,4 +626,5 @@
   mustache.Context = Context;
   mustache.Writer = Writer;
 
+  return mustache;
 }));

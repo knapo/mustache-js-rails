@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.name        = "mustache-js-rails"
   s.version     = MustacheJsRails::VERSION
   s.authors     = ["Krzysztof Knapik"]
-  s.email       = ["k@knapik.cc"]
+  s.email       = ["knapo@knapo.net"]
   s.license     = 'MIT'
   s.homepage    = "https://github.com/knapo/mustache-js-rails"
   s.summary     = %q{mustache.js and jQuery.mustache.js for Rails 3.1+ asset pipeline}
