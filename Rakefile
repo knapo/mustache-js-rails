@@ -1,5 +1,4 @@
 #!/usr/bin/env rake
-require 'bundler/setup'
 require 'bundler/gem_tasks'
 
 task :update do
@@ -15,7 +14,7 @@ task :update do
 	end
 
 	puts 'Updating source files...'
-	`git submodule foreach git pull`
+	`git submodule update --recursive --remote`
 
 	puts 'Copying source js files...'
   FileUtils.cp('mustache.js/mustache.js', js_dir)
