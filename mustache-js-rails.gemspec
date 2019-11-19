@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors     = ['Krzysztof Knapik']
   spec.email       = ['knapo@knapo.net']
 
-  spec.summary     = 'jQuery Colorbox integration for Rails 3.1+ asset pipeline'
+  spec.summary     = 'mustache.js and jQuery.mustache.js integration for Rails 3.1+ asset pipeline'
   spec.homepage    = 'https://github.com/knapo/mustache-js-rails'
   spec.license     = 'MIT'
 
