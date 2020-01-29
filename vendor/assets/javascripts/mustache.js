@@ -1,20 +1,14 @@
-/*!
- * mustache.js - Logic-less {{mustache}} templates with JavaScript
- * http://github.com/janl/mustache.js
- */
+// This file has been generated from mustache.mjs
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global = global || self, global.Mustache = factory());
+}(this, (function () { 'use strict';
 
-/*global define: false Mustache: true*/
-
-(function defineMustache (global, factory) {
-  if (typeof exports === 'object' && exports && typeof exports.nodeName !== 'string') {
-    factory(exports); // CommonJS
-  } else if (typeof define === 'function' && define.amd) {
-    define(['exports'], factory); // AMD
-  } else {
-    global.Mustache = {};
-    factory(global.Mustache); // script, wsh, asp
-  }
-}(this, function mustacheFactory (mustache) {
+  /*!
+   * mustache.js - Logic-less {{mustache}} templates with JavaScript
+   * http://github.com/janl/mustache.js
+   */
 
   var objectToString = Object.prototype.toString;
   var isArray = Array.isArray || function isArrayPolyfill (object) {
@@ -492,14 +486,27 @@
    * avoid the need to parse the same template twice.
    */
   function Writer () {
-    this.cache = {};
+    this.templateCache = {
+      _cache: {},
+      set: function set (key, value) {
+        this._cache[key] = value;
+      },
+      get: function get (key) {
+        return this._cache[key];
+      },
+      clear: function clear () {
+        this._cache = {};
+      }
+    };
   }
 
   /**
    * Clears all cached templates in this writer.
    */
   Writer.prototype.clearCache = function clearCache () {
-    this.cache = {};
+    if (typeof this.templateCache !== 'undefined') {
+      this.templateCache.clear();
+    }
   };
 
   /**
@@ -508,13 +515,15 @@
    * that is generated from the parse.
    */
   Writer.prototype.parse = function parse (template, tags) {
-    var cache = this.cache;
+    var cache = this.templateCache;
     var cacheKey = template + ':' + (tags || mustache.tags).join(':');
-    var tokens = cache[cacheKey];
+    var isCacheEnabled = typeof cache !== 'undefined';
+    var tokens = isCacheEnabled ? cache.get(cacheKey) : undefined;
 
-    if (tokens == null)
-      tokens = cache[cacheKey] = parseTemplate(template, tags);
-
+    if (tokens == undefined) {
+      tokens = parseTemplate(template, tags);
+      isCacheEnabled && cache.set(cacheKey, tokens);
+    }
     return tokens;
   };
 
@@ -533,7 +542,7 @@
    */
   Writer.prototype.render = function render (template, view, partials, tags) {
     var tokens = this.parse(template, tags);
-    var context = (view instanceof Context) ? view : new Context(view);
+    var context = (view instanceof Context) ? view : new Context(view, undefined);
     return this.renderTokens(tokens, context, partials, template, tags);
   };
 
@@ -655,9 +664,32 @@
     return token[1];
   };
 
-  mustache.name = 'mustache.js';
-  mustache.version = '3.1.0';
-  mustache.tags = [ '{{', '}}' ];
+  var mustache = {
+    name: 'mustache.js',
+    version: '4.0.0',
+    tags: [ '{{', '}}' ],
+    clearCache: undefined,
+    escape: undefined,
+    parse: undefined,
+    render: undefined,
+    Scanner: undefined,
+    Context: undefined,
+    Writer: undefined,
+    /**
+     * Allows a user to override the default caching strategy, by providing an
+     * object with set, get and clear methods. This can also be used to disable
+     * the cache by setting it to the literal `undefined`.
+     */
+    set templateCache (cache) {
+      defaultWriter.templateCache = cache;
+    },
+    /**
+     * Gets the default or overridden caching object from the default writer.
+     */
+    get templateCache () {
+      return defaultWriter.templateCache;
+    }
+  };
 
   // All high-level mustache.* functions use this writer.
   var defaultWriter = new Writer();
@@ -694,20 +726,6 @@
     return defaultWriter.render(template, view, partials, tags);
   };
 
-  // This is here for backwards compatibility with 0.4.x.,
-  /*eslint-disable */ // eslint wants camel cased function name
-  mustache.to_html = function to_html (template, view, partials, send) {
-    /*eslint-enable*/
-
-    var result = mustache.render(template, view, partials);
-
-    if (isFunction(send)) {
-      send(result);
-    } else {
-      return result;
-    }
-  };
-
   // Export the escaping function so that the user may override it.
   // See https://github.com/janl/mustache.js/issues/244
   mustache.escape = escapeHtml;
@@ -718,4 +736,5 @@
   mustache.Writer = Writer;
 
   return mustache;
-}));
+
+})));
