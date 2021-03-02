@@ -1,5 +1,6 @@
 #!/usr/bin/env rake
 require 'bundler/gem_tasks'
+require 'json'
 
 task :update do
   Dir['*.gem'].each{ |f| FileUtils.rm(f) }
@@ -21,7 +22,7 @@ task :update do
   FileUtils.cp('jquery.mustache.js/jquery.mustache.js', js_dir)
 
   puts 'Updating version...'
-  mustache_js_version = File.read('mustache.js/mustache.js.nuspec').match(/<version>([\.\d]+)<\/version>/)[1]
+  mustache_js_version = JSON.parse(File.read('mustache.js/package.json')).fetch('version')
   jquery_mustache_js_version = File.read('jquery.mustache.js/jquery.mustache.js').match(/jQuery Mustache - v([\.\d]+)/)[1]
   puts "Current mustache.js version is: #{mustache_js_version}"
   puts "Current jquery.mustache.js version is: #{jquery_mustache_js_version}"
