@@ -30,6 +30,7 @@ GEM
     concurrent-ruby (1.1.9)
     crass (1.0.6)
     erubi (1.10.0)
+    highline (2.0.3)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     loofah (2.10.0)
@@ -57,9 +58,13 @@ GEM
       rake (>= 0.8.7)
       thor (~> 1.0)
     rake (13.0.3)
+    release (0.4.0)
+      visionmedia-commander (>= 3.2.7)
     thor (1.1.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    visionmedia-commander (3.2.9)
+      highline (>= 1.5.0)
     zeitwerk (2.4.2)
 
 PLATFORMS
@@ -68,6 +73,7 @@ PLATFORMS
 DEPENDENCIES
   mustache-js-rails!
   rake
+  release
 
 BUNDLED WITH
    2.2.9
