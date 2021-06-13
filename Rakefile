@@ -31,3 +31,6 @@ task :update do
   readme = readme.gsub(/(?<=<b id="jquery-mustache-js-version">)[\d\.]+(?=<\/b>)/, jquery_mustache_js_version)
   File.open('README.md','w') { |f| f.write(readme) }
 end
+
+task default: %i[update]
+
