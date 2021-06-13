@@ -2,9 +2,9 @@
 
 lib = File.expand_path('../lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'fishplate/version'
+require 'mustache-js-rails/version'
 
 system("bundle") || exit(1)
 system("bundle exec rake") || exit(1)
-system("git commit -am 'Release #{Fishplate::VERSION}'")
+system("git commit -am 'Release #{MustacheJsRails::VERSION}'")
 system("bundle exec rake build release")
