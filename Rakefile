@@ -16,6 +16,7 @@ task :update do
 
 	puts 'Updating source files...'
 	`git submodule update --recursive --remote`
+	`cd mustache.js; git checkout v4.1.0`
 
 	puts 'Copying source js files...'
   FileUtils.cp('mustache.js/mustache.js', js_dir)
