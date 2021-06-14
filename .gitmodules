@@ -4,4 +4,4 @@
 	ignore = dirty
 [submodule "jquery.mustache.js"]
 	path = jquery.mustache.js
-	url = git@github.com:alexis-renard/jquery-Mustache.git
+	url = git@github.com:mhw/jquery-Mustache.git
