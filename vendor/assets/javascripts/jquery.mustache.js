@@ -1,6 +1,6 @@
-/*! jQuery Mustache - v0.2.8 - 2013-06-23
+/*! jQuery Mustache - v0.2.8 - 2021-06-14
 * https://github.com/jonnyreeves/jquery-Mustache
-* Copyright (c) 2013 Jonny Reeves; Licensed MIT */
+* Copyright (c) 2021 Jonny Reeves; Licensed MIT */
 
 /*global jQuery, window */
 (function ($, window) {
@@ -64,8 +64,8 @@
 	 * Adds one or more tempaltes from the DOM using either the supplied templateElementIds or by retrieving all script
 	 * tags of the 'domTemplateType'.  Templates added in this fashion will be registered with their elementId value.
 	 *
-	 * @param [...templateElementIds]	List of element id's present on the DOM which contain templates to be added; 
-	 *									if none are supplied all script tags that are of the same type as the 
+	 * @param [...templateElementIds]	List of element id's present on the DOM which contain templates to be added;
+	 *									if none are supplied all script tags that are of the same type as the
 	 *									`options.domTemplateType` configuration value will be added.
 	 */
 	function addFromDom() {
@@ -124,7 +124,7 @@
 			}
 			return '';
 		}
-		return getMustache().to_html(templateMap[templateName], templateData, templateMap);
+		return getMustache().render(templateMap[templateName], templateData, templateMap);
 	}
 
 	/**
