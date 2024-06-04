@@ -1,3 +1,3 @@
 module MustacheJsRails
-  VERSION = "4.1.0.3"
+  VERSION = "4.1.0.4"
 end
